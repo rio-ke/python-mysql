@@ -1,9 +1,15 @@
-FROM ubuntu:latest
+# Base image
+FROM ubuntu:22.04
 
-RUN apt update && apt upgrade -y && apt install -y mysql-server vim 
+ENV DEBIAN_FRONTEND=noninteractive
 
-ENV MYSQL_ROOT_PASSWORD Passwd@123
+RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && chmod +x /usr/sbin/policy-rc.d
+
+RUN apt update \
+    apt install -y mysql-server vim-tiny && \
+    apt clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 3306
 
 CMD ["mysqld"]
+
