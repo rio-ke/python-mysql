@@ -7,4 +7,10 @@ mydb = mysql.connector.connect(
   password="Ken@123"
 )
 
-print(mydb)
+mycursor = mydb.cursor()
+mycursor.execute("CREATE DATABASE demo0001")
+
+mycursor.execute("SHOW DATABASES")
+
+for x in mycursor:
+  print(x)
