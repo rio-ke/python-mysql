@@ -3,7 +3,7 @@
 
 docker pull ubuntu/mysql
 
-docker run -d --log-driver syslog --log-opt syslog-address=udp://192.168.1.10:514 --name test_db -e TZ=IST -p 3310:3306 -e MYSQL_ROOT_PASSWORD=Passwd@123 ubuntu/mysql:latest
+docker run -d --log-driver syslog --log-opt syslog-address=udp://192.168.1.10:514 tag="docker-{{.Name}}-{{.ID}}" "syslog-format": "rfc5424micro" "syslog-facility": "daemon" --name test_db -e TZ=IST -p 3310:3306 -e MYSQL_ROOT_PASSWORD=Passwd@123 ubuntu/mysql:latest
 
 docker logs -f test_db
 
